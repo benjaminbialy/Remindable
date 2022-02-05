@@ -1,0 +1,32 @@
+.add__task{
+    display: flex;
+    width: 1000px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2%;
+}
+.add__task--submit{
+    background-color: black;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5%;
+    width: 100px;
+}
+.add__task--form{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+.add__task--form input{
+    margin: 4px 2px;
+    font-size: 16px;
+    padding: 3.5% 0;
+}
+.add__task--box{
+    height: 20px;
+    text-align: center;
+}

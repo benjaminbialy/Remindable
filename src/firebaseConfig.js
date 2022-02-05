@@ -3,7 +3,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-  apiKey: "API_KEY",
+  apiKey: APIKEY,
   authDomain: "date-reminder-489e8.firebaseapp.com",
   projectId: "date-reminder-489e8",
   storageBucket: "date-reminder-489e8.appspot.com",
