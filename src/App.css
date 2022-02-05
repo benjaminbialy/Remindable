@@ -1,0 +1,17 @@
+html{
+    background-color: #FAFAFA;
+    max-width: 100vw;
+}
+.home__page{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.home__page--header{
+    display: flex;
+    justify-content: space-between;
+    width: 90vw;
+    align-items: center;
+    margin: 2.5% 0 2% 0;
+}

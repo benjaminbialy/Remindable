@@ -1,5 +1,6 @@
 import { getAuth, signOut } from "firebase/auth";
 import React from 'react';
+import "./SignOut.css"
 
 function SignOut() {
     const signOutWithGoogle = () => {
@@ -11,7 +12,7 @@ function SignOut() {
         });
     }
   return <div>
-            <button onClick={() => { signOutWithGoogle()}}>Sign Out</button>
+            <button className= "sign__out--button" onClick={() => { signOutWithGoogle()}}>Sign Out</button>
         </div>;
 }
 
