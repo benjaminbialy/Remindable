@@ -4,9 +4,9 @@ import { auth, db } from "./firebaseConfig.js"
 
 function SignIn() {
     const signInWithGoogle = () => {
-            const provider = new GoogleAuthProvider();
-
+        const provider = new GoogleAuthProvider();
         const auth = getAuth();
+        console.log("clicked")
 
         signInWithPopup(auth, provider)
         .then((result) => {

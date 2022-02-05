@@ -1,22 +1,29 @@
 import './App.css';
 import SignIn from './SignIn';
-import { useState } from "react"
-import { firebase } from "./firebaseConfig.js"
+import { useEffect, useState } from "react"
+import { auth } from "./firebaseConfig.js"
 import SignOut from './SignOut';
 
 function App() {
 
   const [authenticated, setAuthenticated] = useState(false);
 
-  firebase.auth().onAuthStateChanged((user) => { 
-    if(user){
-      setAuthenticated(!authenticated);
-    }
-  })
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => { 
+      if(user){
+        return setAuthenticated(true);
+      }else{
+        return setAuthenticated(false);
+      }
+    })
+  }, []);
+  
+
 
   if( authenticated === false){
     return (
       <div className="App">
+        <h1>sign</h1>
           <SignIn />
       </div>
     );
