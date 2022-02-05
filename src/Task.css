@@ -1,0 +1,17 @@
+.task{
+    display: flex;
+    justify-content: space-between;
+    width: 1000px;
+    padding: 50px 10px;
+    background-color: #FFFFFF;
+    border-color: gray;
+    border-style: solid;
+    border-width: thin;
+    margin: .5% 0;
+}
+.task h3{
+    margin: 0;
+}
+.task--title{
+    width: 50%;
+}
