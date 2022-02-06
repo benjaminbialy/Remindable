@@ -1,6 +1,6 @@
 .add__task{
     display: flex;
-    width: 1000px;
+    width: 80vw;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2%;
@@ -27,6 +27,6 @@
     padding: 3.5% 0;
 }
 .add__task--box{
-    height: 20px;
+    height: 15px;
     text-align: center;
 }

@@ -15,8 +15,16 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
   // const [tasks, setTasks] = useState("");
   const [uid, setUid] = useState(null);
+  const [tasks, setTasks] = useState([])
+  // const [dueIn, setDueIn] = useState([])
+  // const [dueDate, setDueDate] = useState([]);
 
-var tasks = [];
+  var tasksArray = [];
+  var taskObject = {};
+
+  // var dueInArray = [];
+  // var dueDateArray = [];
+
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => { 
@@ -33,18 +41,32 @@ var tasks = [];
     if(authenticated === true){
       const getTasks = () => {
         db.collection("users").doc(uid).collection("tasks")
+        .orderBy("epochdate", "asc")
         .get()
         .then((querySnapshot) => {
-          var count = 0;
             querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
-                tasks.push(doc.data().taskname)
-                console.log(count)
-                console.log(tasks)
-                console.log("your task is: " + tasks[count])
-                count += 1;
+              
+              taskObject.taskname = doc.data().taskname
+              taskObject.duedate = doc.data().duedate
+              
+              // gets epoch date value and stores it
+              var epochDate = doc.data().epochdate;
+
+              // gets current time
+              const day = new Date();
+              let currentTime = day.getTime();
+
+              // finds time remaining in epoch 
+              var timeRemaining = epochDate - currentTime;
+
+              // finds how many days are left, rounds down and puts into object
+              var daysLeft = (timeRemaining / 86400000)
+              daysLeft = Math.floor(daysLeft)
+
+              taskObject.duein = daysLeft;
             });
+            tasksArray.push(taskObject);
+            setTasks(tasksArray);
         })
         .catch((error) => {
             console.log("Error getting documents: ", error);
@@ -52,7 +74,7 @@ var tasks = [];
       }
       getTasks();
     }
-  }, [authenticated, uid]);
+  }, [authenticated, uid, tasks]);
   
 
 
@@ -70,9 +92,15 @@ var tasks = [];
           <SignOut />
         </header>
         <AddTask />
-        <Task task__title="BUSMAN SAC 1 - Marketing" days__away="4" />
-        <Task task__title="SWD - Weekly task" days__away="5" />
-        <Task task__title="ENGLISH LANGUAGE AC" days__away="17" />
+        <div>
+          {tasks.map((task) => (
+          <Task
+            key={task}
+            // task__title={task}
+            days__away={task.duein}
+          />
+        ))}
+        </div>
       </div>
     )
   }

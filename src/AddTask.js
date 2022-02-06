@@ -6,7 +6,7 @@ import "./AddTask.css"
 function AddTask() {
     const [taskName, setTaskName] = useState("");
     const [dueDate, setDueDate] = useState("");
-    const [epochDate, setEpochDate] = useState("")
+    const [epochDate, setEpochDate] = useState(0)
     const [uid, setUid] = useState(null);
 
     auth.onAuthStateChanged((user) => { 

@@ -6,7 +6,8 @@ import "./Task.css"
 function Task(props) {
   return <div className='task'> 
             <h3 className='task--title'>{props.task__title}</h3>
-            <h3>Due in {props.days__away} days</h3>
+            <h3>In {props.days__away} days</h3>
+            <h3>Due date: {props.due__date}</h3>
             <div className='task--buttons'>
                 <EditIcon />
                 <HighlightOffIcon />
