@@ -82,6 +82,12 @@ function App() {
     return (
       <div className="App">
             <SignIn />
+            <h3>Simply enter your tasks name and due date and we'll do the rest!</h3>
+            <Task 
+              task__title="Business Management Test"
+              days__away="4"
+              due__date="2022-04-07"
+            />
       </div>
     );
   }else{

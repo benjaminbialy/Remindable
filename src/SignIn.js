@@ -1,5 +1,6 @@
 import React from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import "./SignIn.css"
 
 function SignIn() {
     const signInWithGoogle = () => {
@@ -25,10 +26,15 @@ function SignIn() {
             // ...
         });
     }
-  return <div>
-            <h1>Welcome.</h1>
-            <h2>Sign in below, with Google</h2>
-            <button onClick={() => { signInWithGoogle()}}>Sign In With Google</button>
+  return <div className='signin'>
+            <div className='signin--header'>
+                <h1>Welcome to remindable,</h1>
+                <h3>the most easy and practical planning solution there is.</h3>
+            </div>
+            <div className='signin--prompt'>
+                <h2>Sign in below, with Google</h2>
+                <button className='black--button' onClick={() => { signInWithGoogle()}}>Sign In With Google</button>
+            </div>
         </div>;
 }
 
