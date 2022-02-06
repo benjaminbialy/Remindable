@@ -3,11 +3,14 @@ import { db, auth } from "./firebaseConfig.js"
 import { addDoc, collection } from "firebase/firestore"
 import "./AddTask.css"
 
+export var added = true;
+
 function AddTask() {
     const [taskName, setTaskName] = useState("");
     const [dueDate, setDueDate] = useState("");
     const [epochDate, setEpochDate] = useState(0)
     const [uid, setUid] = useState(null);
+
 
     auth.onAuthStateChanged((user) => { 
         if (user) {
@@ -25,7 +28,6 @@ function AddTask() {
 
     const handleAddTask = async (e) => {
         e.preventDefault();
-
         if(taskName !== "" ){
              // Add a new document within the users -> user id -> tasks collection. 
              // This effectively allows for each user to have their own set of tasks.
@@ -36,7 +38,7 @@ function AddTask() {
             });
         };
         setTaskName("")
-        setDueDate("")
+        added = !added;
     }
 
 

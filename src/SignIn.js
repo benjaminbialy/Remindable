@@ -32,7 +32,7 @@ function SignIn() {
                 <h3>the most easy and practical planning solution there is.</h3>
             </div>
             <div className='signin--prompt'>
-                <h2>Sign in below, with Google</h2>
+                <h2>To proceed to the tool, sign in below</h2>
                 <button className='black--button' onClick={() => { signInWithGoogle()}}>Sign In With Google</button>
             </div>
         </div>;

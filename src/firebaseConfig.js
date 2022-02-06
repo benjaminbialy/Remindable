@@ -3,13 +3,13 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-  apiKey: "",
-  authDomain: "date-reminder-489e8.firebaseapp.com",
-  projectId: "date-reminder-489e8",
-  storageBucket: "date-reminder-489e8.appspot.com",
-  messagingSenderId: "129919998580",
-  appId: "1:129919998580:web:a00c4372ea5a9fc6e30f21",
-  measurementId: "G-6HFMYM5J6S"
+  apiKey: "AIzaSyAl5n_IoQA-Trk1eV6Ebrgtlols-t08NMw",
+  authDomain: "remindable-3442b.firebaseapp.com",
+  projectId: "remindable-3442b",
+  storageBucket: "remindable-3442b.appspot.com",
+  messagingSenderId: "233559750767",
+  appId: "1:233559750767:web:23918f636cab42c63bf59a",
+  measurementId: "G-2QEFBVG5CV"
 };
 
 // Use this to initialize the firebase App
