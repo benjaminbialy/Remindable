@@ -4,16 +4,21 @@ import { useEffect, useState } from "react"
 import { auth, db } from "./firebaseConfig.js"
 import SignOut from './SignOut.js';
 import Task from './Task.js';
-import AddTask, { added } from './AddTask.js';
+import AddTask from './AddTask.js';
 
 function App() {
 
   const [authenticated, setAuthenticated] = useState(false);
   const [uid, setUid] = useState(null);
   const [tasks, setTasks] = useState([])
+  const [taskName, setTaskName] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [dueIn, setDueIn] = useState(0);
 
-  var tasksArray = [];
-  var taskObject = {};
+  const [taskObject, setTaskObject] = useState(null)
+
+  var tempTaskObject = {};
+  var tempTaskArray = []
 
 
   useEffect(() => {
@@ -27,47 +32,6 @@ function App() {
     })
   }, []);
 
-  // useEffect(() => {
-  //   if(authenticated === true){
-  //     const getTasks = () => {
-  //       db.collection("users").doc(uid).collection("tasks")
-  //       .orderBy("epochdate", "asc")
-  //       .get()
-  //       .then((querySnapshot) => {
-  //           querySnapshot.forEach((doc) => {
-              
-  //             taskObject.taskname = doc.data().taskname
-  //             taskObject.duedate = doc.data().duedate
-              
-  //             // gets epoch date value and stores it
-  //             var epochDate = doc.data().epochdate;
-
-  //             // gets current time
-  //             const day = new Date();
-  //             let currentTime = day.getTime();
-
-  //             // finds time remaining in epoch 
-  //             var timeRemaining = epochDate - currentTime;
-
-  //             // finds how many days are left, rounds down and puts into object
-  //             var daysLeft = (timeRemaining / 86400000)
-  //             daysLeft = Math.floor(daysLeft)
-
-  //             taskObject.duein = daysLeft;
-  //             tasksArray.push(taskObject);
-  //             setTasks(tasksArray);
-  //           });
-  //       })
-  //       .catch((error) => {
-  //           console.log("Error getting documents: ", error);
-  //       });
-  //     }
-  //     getTasks();
-  //     console.log("hiiiii")  
-  //   }
-  // }, [added]);
-  
-
   useEffect(() => {
     if(authenticated === true){
       const getTasks = () => {
@@ -76,9 +40,12 @@ function App() {
         .get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-              taskObject.taskname = doc.data().taskname
-              taskObject.duedate = doc.data().duedate
-              
+
+              tempTaskArray.push( doc.data().taskname)
+
+              tempTaskObject.taskname= doc.data().taskname
+              tempTaskObject.duedate= doc.data().duedate
+
               // gets epoch date value and stores it
               var epochDate = doc.data().epochdate;
 
@@ -93,11 +60,16 @@ function App() {
               var daysLeft = (timeRemaining / 86400000)
               daysLeft = Math.floor(daysLeft)
 
-              taskObject.duein = daysLeft;
-              tasksArray.push(taskObject);
+              tempTaskObject.duein = daysLeft
+
+              // tempTaskArray.push(tempTaskArray)
+
+              console.log('tempTaskObject = ' + JSON.stringify(tempTaskObject))
+
             });
-            setTasks(tasksArray);
-            console.log(tasksArray)
+            console.log("tasks = " + tasks)
+            setTasks(tempTaskArray)
+
         })
         .catch((error) => {
             console.log("Error getting documents: ", error);
@@ -106,8 +78,6 @@ function App() {
       getTasks();
     }
   }, [authenticated, uid]);
-  
-
 
   if( authenticated === false){
     return (
@@ -133,9 +103,7 @@ function App() {
           {tasks.map((task) => (
           <Task
             key={task}
-            task__title={task.taskname}
-            days__away={task.duein}
-            due__date={task.duedate}
+            task__title={task}
           />
         ))}
         </div>
