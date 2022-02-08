@@ -5,17 +5,14 @@ import { auth, db } from "./firebaseConfig.js"
 import SignOut from './SignOut.js';
 import Task from './Task.js';
 import AddTask from './AddTask.js';
+import { doc, deleteDoc, documentId } from "firebase/firestore";
+
 
 function App() {
 
   const [authenticated, setAuthenticated] = useState(false);
   const [uid, setUid] = useState(null);
   const [tasks, setTasks] = useState([])
-  const [taskName, setTaskName] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [dueIn, setDueIn] = useState(0);
-
-  const [taskObject, setTaskObject] = useState(null)
 
   var tempTaskObject = {};
   var tempTaskArray = []
@@ -41,8 +38,10 @@ function App() {
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
 
-              tempTaskArray.push( doc.data().taskname)
+              tempTaskObject = {};
 
+              // tempTaskObject is an empty object
+              tempTaskObject.id = doc.id;
               tempTaskObject.taskname= doc.data().taskname
               tempTaskObject.duedate= doc.data().duedate
 
@@ -56,18 +55,15 @@ function App() {
               // finds time remaining in epoch 
               var timeRemaining = epochDate - currentTime;
 
-              // finds how many days are left, rounds down and puts into object
+              // finds how many days are left and rounds down
               var daysLeft = (timeRemaining / 86400000)
               daysLeft = Math.floor(daysLeft)
 
               tempTaskObject.duein = daysLeft
 
-              // tempTaskArray.push(tempTaskArray)
-
-              console.log('tempTaskObject = ' + JSON.stringify(tempTaskObject))
+              tempTaskArray.push(tempTaskObject)
 
             });
-            console.log("tasks = " + tasks)
             setTasks(tempTaskArray)
 
         })
@@ -78,6 +74,11 @@ function App() {
       getTasks();
     }
   }, [authenticated, uid]);
+
+  const deleteTask = () =>{
+    deleteDoc(doc(db, "users", uid, "tasks", tasks.task.id));
+  }
+
 
   if( authenticated === false){
     return (
@@ -102,8 +103,11 @@ function App() {
         <div>
           {tasks.map((task) => (
           <Task
-            key={task}
-            task__title={task}
+            key={task.id}
+            task__title={task.taskname}
+            due__date={task.duedate}
+            days__away={task.duein}
+            delete__task={deleteTask}
           />
         ))}
         </div>
