@@ -27,6 +27,29 @@
     padding: 3.5% 0;
 }
 .add__task--box{
-    height: 15px;
     text-align: center;
+    padding: 0;
 }
+@media screen and (max-width: 1140px) {
+    .add__task--form{
+        width: 65%;
+    }
+  }
+  @media screen and (max-width: 875px) {
+    .add__task{
+        flex-direction: column;
+    }
+    .add__task--form{
+        width: 100%;
+    }
+  }
+  @media screen and (max-width: 575px) {
+    .add__task--form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .add__task--box{
+        width: 100%;
+    }
+  }

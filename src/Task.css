@@ -7,7 +7,7 @@
     border-color: gray;
     border-style: solid;
     border-width: thin;
-    margin: .5% 0;
+    margin: 20px 0;
 }
 .task h3{
     margin: 0;
@@ -15,3 +15,27 @@
 .task--title{
     width: 50%;
 }
+@media screen and (max-width: 1095px) {
+    .task{
+        width: 80vw;
+    }
+    .task--title{
+        width: 30%;
+    }
+  }
+  @media screen and (max-width: 675px) {
+    .task{
+        flex-direction: column;
+        padding: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+    .task--title{
+        width: 100%;     
+        text-align: center;   
+    }
+    .task h3{
+        margin: 10px 0;
+    }
+
+  }
