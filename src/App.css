@@ -22,6 +22,15 @@ html{
     align-items: center;
     margin-bottom: 10%;
 }
+.sign__in__desc, .App h2{
+    display: flex;
+    text-align: center;
+}
+@media screen and (max-width: 600px) {
+    h3{
+        margin: 0 5%;
+    }
+}
 @media screen and (max-width: 545px) {
     h1{
         font-size: 17.5pt;

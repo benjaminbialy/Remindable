@@ -4,6 +4,7 @@
     background-color: #FAFAFAFA;
     align-items: center;
     justify-content: center;
+    text-align: center;
     height: 50vh;
 }
 .signin--prompt{
