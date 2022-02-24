@@ -24,7 +24,7 @@ function SignIn() {
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
-        });
+        }); 
     }
   return <div className='signin'>
             <div className='signin--header'>
