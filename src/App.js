@@ -81,7 +81,6 @@ function App() {
 
   const deleteTask = (docID) =>{
     deleteDoc(doc(db, "users", uid, "tasks", tasks[docID].id));
-    alert("deleted" + JSON.stringify(tasks[docID].id));
   }
 
 
