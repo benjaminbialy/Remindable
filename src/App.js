@@ -13,6 +13,7 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [uid, setUid] = useState(null);
   const [tasks, setTasks] = useState([])
+  const [count, setCount] = useState(0)
 
   var tempTaskObject = {};
   var tempTaskArray = [];
@@ -77,10 +78,11 @@ function App() {
       }
       getTasks();
     }
-  }, [authenticated, uid]);
+  }, [authenticated, uid, count]);
 
   const deleteTask = (docID) =>{
     deleteDoc(doc(db, "users", uid, "tasks", tasks[docID].id));
+    setCount(count + 1);
   }
 
 
