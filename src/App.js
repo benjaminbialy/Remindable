@@ -15,7 +15,8 @@ function App() {
   const [tasks, setTasks] = useState([])
 
   var tempTaskObject = {};
-  var tempTaskArray = []
+  var tempTaskArray = [];
+  var docCount = 0;
 
 
   useEffect(() => {
@@ -42,8 +43,11 @@ function App() {
 
               // tempTaskObject is an empty object
               tempTaskObject.id = doc.id;
-              tempTaskObject.taskname= doc.data().taskname
-              tempTaskObject.duedate= doc.data().duedate
+              tempTaskObject.taskname = doc.data().taskname;
+              tempTaskObject.duedate = doc.data().duedate;
+              tempTaskObject.number = docCount;
+              
+              docCount++
 
               // gets epoch date value and stores it
               var epochDate = doc.data().epochdate;
@@ -75,8 +79,9 @@ function App() {
     }
   }, [authenticated, uid]);
 
-  const deleteTask = () =>{
-    deleteDoc(doc(db, "users", uid, "tasks", tasks.task.id));
+  const deleteTask = (docID) =>{
+    deleteDoc(doc(db, "users", uid, "tasks", tasks[docID].id));
+    alert("deleted" + JSON.stringify(tasks[docID].id));
   }
 
 
@@ -84,7 +89,7 @@ function App() {
     return (
       <div className="App">
             <SignIn />
-            <h3>Simply enter your tasks name and due date and we'll do the rest!</h3>
+            <h3 className='sign__in__desc'>Simply enter your tasks name and due date and we'll do the rest!</h3>
             <Task 
               task__title="Business Management Test"
               days__away="4"
@@ -104,10 +109,11 @@ function App() {
           {tasks.map((task) => (
           <Task
             key={task.id}
+            taskID={task.number}
             task__title={task.taskname}
             due__date={task.duedate}
             days__away={task.duein}
-            delete__task={deleteTask}
+            deleteTask={deleteTask}
           />
         ))}
         </div>
