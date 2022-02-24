@@ -105,7 +105,10 @@ function App() {
           <h1>remindable.</h1>
           <SignOut />
         </header>
-        <AddTask />
+        <AddTask 
+          setCount={setCount}
+          count={count}
+        />
         <div>
           {tasks.map((task) => (
           <Task

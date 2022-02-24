@@ -5,7 +5,8 @@ import "./AddTask.css"
 
 export var added = true;
 
-function AddTask() {
+function AddTask(props) {
+    const { setCount } = props;
     const [taskName, setTaskName] = useState("");
     const [dueDate, setDueDate] = useState("");
     const [epochDate, setEpochDate] = useState(0)
@@ -36,6 +37,7 @@ function AddTask() {
               taskname: taskName,
               epochdate: epochDate
             });
+            setCount(props.count + 1)
         };
         setTaskName("")
         added = !added;
